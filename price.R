@@ -31,7 +31,7 @@ df <- as.data.frame(data)
 eps <- df[, grep("(EPS)", colnames(df))]
 
 # Bind the data col with the eps data
-eps <- cbind(df[, 1], eps)
+eps <- cbind(as.Date(df[, 1]), eps)
 
 # Set the col name for the data
 colnames(eps)[1] <- "Date"
@@ -40,4 +40,4 @@ colnames(eps)[1] <- "Date"
 eps <- na.omit(eps)
 
 # Write to CSV
-write.csv(eps, "./datasets/eps.csv")
+write.csv(eps, "./datasets/eps.csv", row.names = F)
