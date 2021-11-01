@@ -23,7 +23,7 @@ library("data.table")
 library("ggplot2")
 
 # Read the csv
-data <- read.csv("./datasets/Pre_Processed/Arms_cleaned_converted.csv", header = T)
+data <- read.csv("./datasets/Pre_Processed/Tabac_cleaned_converted.csv", header = T)
 
 # Convert it to a data frame
 df <- as.data.frame(data)
@@ -47,7 +47,7 @@ eps <- eps[, -1]
 # line_colors <- rainbow(ncol(eps))
 
 # PDF settings
-pdf("./datasets/Processed/arms_eps.pdf", width = 12, height = 8, compress = T)
+pdf("./datasets/Processed/tabac_eps.pdf", width = 12, height = 8, compress = T)
 
 
 # Create base chart
@@ -82,4 +82,4 @@ dev.off()
 
 
 # Write to CSV
-write.csv(eps, "./datasets/Processed/arms_eps.csv", row.names = F)
+write.csv(eps, "./datasets/Processed/tabac_eps.csv", row.names = F)
