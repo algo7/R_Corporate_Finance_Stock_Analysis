@@ -40,6 +40,7 @@ df[df == "TL"] <- "TRY"
 df[df == "RI"] <- "IDR"
 df[df == "K$"] <- "HKD"
 df[df == "DK"] <- "DKK"
+df[df == "CH"] <- "CHF"
 
 # Exchange rate for the past 5 years (2016-2021)
 # From https://www.ofx.com/en-au/forex-news/historical-exchange-rates/yearly-average-rates/
@@ -51,6 +52,7 @@ cad_to_usd <- 0.768548
 idr_to_usd <- 0.000071
 hkd_to_usd <- 0.128242
 dkk_to_usd <- 0.154763
+chf_to_usd <- 1.041509
 
 # Currency conversion function
 currency_convert <- function(df) {
@@ -65,6 +67,7 @@ currency_convert <- function(df) {
     idr_stocks <- which(df[1, ] == "IDR")
     hkd_stocks <- which(df[1, ] == "HKD")
     dkk_stocks <- which(df[1, ] == "DKK")
+    chf_stocks <- which(df[1, ] == "CHF")
 
     # Remove the currency symbol
     df <- df[-1, ]
@@ -78,8 +81,8 @@ currency_convert <- function(df) {
     # Convert EUR stocks
     converted_eur_stocks <- df[, eur_stocks] * eur_to_usd
 
-    # Convert GBP stocks
-    converted_gbp_stocks <- df[, gbp_stocks] * gbp_to_usd
+    # Convert GBP stocks (/1000 cuz stock prices are sterlings)
+    converted_gbp_stocks <- df[, gbp_stocks] / 100 * gbp_to_usd
 
     # Convert TRY stocks
     converted_try_stocks <- df[, try_stocks] * try_to_usd
@@ -96,11 +99,15 @@ currency_convert <- function(df) {
     # Convert HKD stocks
     converted_dkk_stocks <- df[, dkk_stocks] * dkk_to_usd
 
+    # Convert CHF stocks
+    converted_chf_stocks <- df[, chf_stocks] * chf_to_usd
+
+
 
     df <- cbind(
         converted_aud_stocks, converted_eur_stocks, converted_gbp_stocks,
         converted_try_stocks, converted_cad_stocks, converted_idr_stocks,
-        converted_hkd_stocks, converted_dkk_stocks
+        converted_hkd_stocks, converted_dkk_stocks, converted_chf_stocks
     )
 
     return(df)
