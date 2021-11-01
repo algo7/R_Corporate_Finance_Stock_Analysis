@@ -38,7 +38,10 @@ eps <- cbind(df[, 1], eps)
 colnames(eps)[1] <- "date"
 
 # Remove NAs
-eps <- na.omit(eps)
+# eps <- na.omit(eps)
+
+# Replace NAs with 0
+eps[is.na(eps)] <- 0
 
 # Format dates
 eps_date <- as.Date(gsub("/", "-", eps$date, ), "%m-%d-%y")
@@ -46,18 +49,29 @@ eps_date <- as.Date(gsub("/", "-", eps$date, ), "%m-%d-%y")
 # Remove the date column
 eps <- eps[, -1]
 
-chart <- ggplot(eps, aes(x = eps_date))
+# Colors to use
+# line_colors <- rainbow(ncol(eps))
+
+# Create base chart
+chart <- ggplot(eps, aes(x = eps_date)) +
+    ggtitle("EPS Trend") +
+    theme(plot.title = element_text(size = 20, face = "bold", hjust = 0.5)) +
+    xlab("Date") +
+    ylab("Dollars")
 
 
+# Add the data of each stock to the based chart
 for (i in seq_len(ncol(eps))) {
-    chart <- chart + geom_line(aes_string(y = eps[, i]))
+    chart <- chart +
+        geom_line(aes_(
+            y = eps[, i],
+            group = colnames(eps)[i],
+            color = colnames(eps)[i],
+        ))
 }
 
+print(chart)
 
-plot(chart)
-
-
-# print(chart)
 
 # Write to CSV
-# write.csv(eps, "./datasets/eps.csv", row.names = F)
+write.csv(eps, "./datasets/eps.csv", row.names = F)
