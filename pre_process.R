@@ -41,6 +41,7 @@ df[df == "RI"] <- "IDR"
 df[df == "K$"] <- "HKD"
 df[df == "DK"] <- "DKK"
 df[df == "CH"] <- "CHF"
+df[df == "IR"] <- "INR"
 
 # Exchange rate for the past 5 years (2016-2021)
 # From https://www.ofx.com/en-au/forex-news/historical-exchange-rates/yearly-average-rates/
@@ -54,6 +55,7 @@ hkd_to_usd <- 0.128242
 dkk_to_usd <- 0.154763
 chf_to_usd <- 1.041509
 ils_to_usd <- 0.287187
+inr_to_usd <- 0.014258
 
 # Currency conversion function
 currency_convert <- function(df) {
@@ -70,6 +72,7 @@ currency_convert <- function(df) {
     dkk_stocks <- which(df[1, ] == "DKK")
     chf_stocks <- which(df[1, ] == "CHF")
     ils_stocks <- which(df[1, ] == "ILS")
+    inr_stocks <- which(df[1, ] == "INR")
 
     # Remove the currency symbol
     df <- df[-1, ]
@@ -107,13 +110,16 @@ currency_convert <- function(df) {
     # Convert ILS stocks
     converted_ils_stocks <- df[, ils_stocks] * ils_to_usd
 
+    # Convert INR stocks
+    converted_inr_stocks <- df[, inr_stocks] * inr_to_usd
+
 
 
     df <- cbind(
         converted_aud_stocks, converted_eur_stocks, converted_gbp_stocks,
         converted_try_stocks, converted_cad_stocks, converted_idr_stocks,
         converted_hkd_stocks, converted_dkk_stocks, converted_chf_stocks,
-        converted_ils_stocks
+        converted_ils_stocks, converted_inr_stocks
     )
 
     return(df)
