@@ -41,7 +41,7 @@ colnames(eps)[1] <- "date"
 # eps <- na.omit(eps)
 
 # Replace NAs with 0
-eps[is.na(eps)] <- 0
+# eps[is.na(eps)] <- 0
 
 # Format dates
 eps_date <- as.Date(gsub("/", "-", eps$date, ), "%m-%d-%y")
