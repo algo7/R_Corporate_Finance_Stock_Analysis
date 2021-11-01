@@ -25,7 +25,7 @@ library("imputeTS")
 
 
 # Read the csv
-data <- read.csv("./datasets/Arms.csv", header = T)
+data <- read.csv("./datasets/CBD.csv", header = T)
 
 # Convert it to a data frame
 df <- as.data.frame(data, stringAsFactor = F)
@@ -38,14 +38,19 @@ df[df == "£"] <- "GBP"
 df[df == "I£"] <- "GBP"
 df[df == "TL"] <- "TRY"
 df[df == "RI"] <- "IDR"
+df[df == "K$"] <- "HKD"
+df[df == "DK"] <- "DKK"
 
 # Exchange rate for the past 5 years (2016-2021)
+# From https://www.ofx.com/en-au/forex-news/historical-exchange-rates/yearly-average-rates/
 aud_to_usd <- 0.731572
 eur_to_usd <- 1.153201
 gbp_to_usd <- 1.313474
 try_to_usd <- 0.185946
 cad_to_usd <- 0.768548
 idr_to_usd <- 0.000071
+hkd_to_usd <- 0.128242
+dkk_to_usd <- 0.154763
 
 # Currency conversion function
 currency_convert <- function(df) {
@@ -58,6 +63,8 @@ currency_convert <- function(df) {
     try_stocks <- which(df[1, ] == "TRY")
     cad_stocks <- which(df[1, ] == "CAD")
     idr_stocks <- which(df[1, ] == "IDR")
+    hkd_stocks <- which(df[1, ] == "HKD")
+    dkk_stocks <- which(df[1, ] == "DKK")
 
     # Remove the currency symbol
     df <- df[-1, ]
@@ -83,10 +90,17 @@ currency_convert <- function(df) {
     # Convert IDR stocks
     converted_idr_stocks <- df[, idr_stocks] * idr_to_usd
 
+    # Convert HKD stocks
+    converted_hkd_stocks <- df[, hkd_stocks] * hkd_to_usd
+
+    # Convert HKD stocks
+    converted_dkk_stocks <- df[, dkk_stocks] * dkk_to_usd
+
 
     df <- cbind(
         converted_aud_stocks, converted_eur_stocks, converted_gbp_stocks,
-        converted_try_stocks, converted_cad_stocks, converted_idr_stocks
+        converted_try_stocks, converted_cad_stocks, converted_idr_stocks,
+        converted_hkd_stocks, converted_dkk_stocks
     )
 
     return(df)
@@ -113,20 +127,26 @@ df <- as.data.frame(t(df))
 # The dates
 dates <- rownames(df)[-1]
 
-# Convert currency
-converted_stocks <- currency_convert(df)
-
 # Non-usd stocks
-non_usd_stocks <- which(df != "USD")
+non_usd_stocks <- which(df[1, ] != "USD")
 
-# Remove non-usd stocks
-df <- df[, -non_usd_stocks]
+if (length(non_usd_stocks) != 0) {
+    # Convert currency
+    converted_stocks <- currency_convert(df)
 
-# Remove the currency column
-df <- df[-1, ]
+    # Remove non-usd stocks
+    df <- df[, -non_usd_stocks]
 
-# Add converted stocks
-df <- cbind(converted_stocks, df)
+    # Remove the currency column
+    df <- df[-1, ]
+
+    # Add converted stocks
+    df <- cbind(converted_stocks, df)
+} else {
+    # Remove the currency column
+    df <- df[-1, ]
+}
+
 
 # Convert the data frame to numeric
 df <- sapply(df, as.numeric)
@@ -140,5 +160,5 @@ df <- as.data.frame(round(df, 2), stringAsFactor = F)
 # Add the dates
 rownames(df) <- dates
 
-# Write to csv
-write.csv(df, "./datasets/Arms_cleaned_converted.csv", row.names = T)
+# # Write to csv
+write.csv(df, "./datasets/Processed/CBD_cleaned_converted.csv", row.names = T)
