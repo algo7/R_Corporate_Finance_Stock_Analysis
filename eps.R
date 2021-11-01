@@ -52,12 +52,21 @@ eps <- eps[, -1]
 # Colors to use
 # line_colors <- rainbow(ncol(eps))
 
+# PDF settings
+pdf("casino_eps.pdf", width = 12, height = 8, compress = T)
+
+
 # Create base chart
 chart <- ggplot(eps, aes(x = eps_date)) +
     ggtitle("EPS Trend") +
-    theme(plot.title = element_text(size = 20, face = "bold", hjust = 0.5)) +
+    theme(
+        plot.title = element_text(size = 20, face = "bold", hjust = 0.5),
+        axis.title = element_text(size = 12, face = "bold"),
+    ) +
     xlab("Date") +
-    ylab("Dollars")
+    ylab("Dollars") +
+    ylim(0, max(eps) * 1.1)
+
 
 
 # Add the data of each stock to the based chart
@@ -70,7 +79,12 @@ for (i in seq_len(ncol(eps))) {
         ))
 }
 
+# Change legend box title
+chart$labels$colour <- "Stocks"
+
+# Print the chart
 print(chart)
+dev.off()
 
 
 # Write to CSV
