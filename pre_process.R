@@ -35,7 +35,7 @@ df[df == "U$"] <- "USD"
 df[df == "A$"] <- "AUD"
 df[df == "E"] <- "EUR"
 df[df == "£"] <- "GBP"
-df[df == "I£"] <- "GBP"
+df[df == "I£"] <- "ILS"
 df[df == "TL"] <- "TRY"
 df[df == "RI"] <- "IDR"
 df[df == "K$"] <- "HKD"
@@ -53,6 +53,7 @@ idr_to_usd <- 0.000071
 hkd_to_usd <- 0.128242
 dkk_to_usd <- 0.154763
 chf_to_usd <- 1.041509
+ils_to_usd <- 0.287187
 
 # Currency conversion function
 currency_convert <- function(df) {
@@ -68,6 +69,7 @@ currency_convert <- function(df) {
     hkd_stocks <- which(df[1, ] == "HKD")
     dkk_stocks <- which(df[1, ] == "DKK")
     chf_stocks <- which(df[1, ] == "CHF")
+    ils_stocks <- which(df[1, ] == "ILS")
 
     # Remove the currency symbol
     df <- df[-1, ]
@@ -102,12 +104,16 @@ currency_convert <- function(df) {
     # Convert CHF stocks
     converted_chf_stocks <- df[, chf_stocks] * chf_to_usd
 
+    # Convert ILS stocks
+    converted_ils_stocks <- df[, ils_stocks] * ils_to_usd
+
 
 
     df <- cbind(
         converted_aud_stocks, converted_eur_stocks, converted_gbp_stocks,
         converted_try_stocks, converted_cad_stocks, converted_idr_stocks,
-        converted_hkd_stocks, converted_dkk_stocks, converted_chf_stocks
+        converted_hkd_stocks, converted_dkk_stocks, converted_chf_stocks,
+        converted_ils_stocks
     )
 
     return(df)
