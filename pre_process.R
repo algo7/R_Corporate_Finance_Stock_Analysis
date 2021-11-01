@@ -86,12 +86,11 @@ currency_convert <- function(df) {
 
     df <- cbind(
         converted_aud_stocks, converted_eur_stocks, converted_gbp_stocks,
-        converted_try_stocks, converted_cad_stocks,converted_idr_stocks
+        converted_try_stocks, converted_cad_stocks, converted_idr_stocks
     )
 
     return(df)
 }
-
 
 # Transpose the data frame
 df <- as.data.frame(t(df))
@@ -110,6 +109,9 @@ df <- df[, -1]
 
 # Transpose the data frame
 df <- as.data.frame(t(df))
+
+# The dates
+dates <- rownames(df)[-1]
 
 # Convert currency
 converted_stocks <- currency_convert(df)
@@ -133,7 +135,10 @@ df <- sapply(df, as.numeric)
 df <- na_interpolation(df, option = "spline")
 
 # Round numbers to 2 decimal places
-df <- round(df, 2)
+df <- as.data.frame(round(df, 2), stringAsFactor = F)
+
+# Add the dates
+rownames(df) <- dates
 
 # Write to csv
 write.csv(df, "./datasets/Arms_cleaned_converted.csv", row.names = T)
