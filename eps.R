@@ -23,7 +23,7 @@ library("data.table")
 library("ggplot2")
 
 # Read the csv
-data <- read.csv("./datasets/Pre_Processed/Tabac_cleaned_converted.csv", header = T)
+data <- read.csv("./datasets/Pre_Processed/CBD_cleaned_converted.csv", header = T)
 
 # Convert it to a data frame
 df <- as.data.frame(data)
@@ -47,12 +47,12 @@ eps <- eps[, -1]
 # line_colors <- rainbow(ncol(eps))
 
 # PDF settings
-pdf("./datasets/Processed/tabac_eps.pdf", width = 12, height = 8, compress = T)
+pdf("./datasets/Processed/EPS/cbd_eps.pdf", width = 12, height = 8, compress = T)
 
 
 # Create base chart
 chart <- ggplot(eps, aes(x = eps_date)) +
-    ggtitle("EPS Trend") +
+    ggtitle("EPS Trend (CBD)") +
     theme(
         plot.title = element_text(size = 20, face = "bold", hjust = 0.5),
         axis.title = element_text(size = 12, face = "bold"),
@@ -82,4 +82,4 @@ dev.off()
 
 
 # Write to CSV
-write.csv(eps, "./datasets/Processed/tabac_eps.csv", row.names = F)
+write.csv(eps, "./datasets/Processed/EPS/cbd_eps.csv", row.names = F)

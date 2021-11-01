@@ -29,7 +29,7 @@ data <- read.csv("./datasets/Pre_Processed/Tabac_cleaned_converted.csv", header 
 df <- as.data.frame(data)
 
 # Grep price
-price <- df[, grep("(P)", colnames(df))]
+price <- df[, grep("P.$", colnames(df))]
 
 # Bind the data col with the price data
 price <- cbind(df[, 1], price)
@@ -47,12 +47,12 @@ price <- price[, -1]
 # line_colors <- rainbow(ncol(price))
 
 # PDF settings
-pdf("./datasets/Processed/tabac_price.pdf", width = 12, height = 8, compress = T)
+pdf("./datasets/Processed/Price/tabac_price.pdf", width = 12, height = 8, compress = T)
 
 
 # Create base chart
 chart <- ggplot(price, aes(x = price_date)) +
-    ggtitle("Price Trend") +
+    ggtitle("Price Trend (Tabac)") +
     theme(
         plot.title = element_text(size = 20, face = "bold", hjust = 0.5),
         axis.title = element_text(size = 12, face = "bold"),
@@ -82,4 +82,4 @@ dev.off()
 
 
 # Write to CSV
-write.csv(price, "./datasets/Processed/tabac_price.csv", row.names = F)
+write.csv(price, "./datasets/Processed/Price/tabac_price.csv", row.names = F)
