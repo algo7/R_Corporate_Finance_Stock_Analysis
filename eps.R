@@ -23,7 +23,7 @@ library("data.table")
 library("ggplot2")
 
 # Read the csv
-data <- read.csv("./datasets/Casino_cleaned.csv", header = T)
+data <- read.csv("./datasets/Pre_Processed/Arms_cleaned_converted.csv", header = T)
 
 # Convert it to a data frame
 df <- as.data.frame(data)
@@ -37,12 +37,6 @@ eps <- cbind(df[, 1], eps)
 # Set the col name for the data
 colnames(eps)[1] <- "date"
 
-# Remove NAs
-# eps <- na.omit(eps)
-
-# Replace NAs with 0
-# eps[is.na(eps)] <- 0
-
 # Format dates
 eps_date <- as.Date(gsub("/", "-", eps$date, ), "%m-%d-%y")
 
@@ -53,7 +47,7 @@ eps <- eps[, -1]
 # line_colors <- rainbow(ncol(eps))
 
 # PDF settings
-pdf("casino_eps.pdf", width = 12, height = 8, compress = T)
+pdf("./datasets/Processed/arms_eps.pdf", width = 12, height = 8, compress = T)
 
 
 # Create base chart
@@ -88,4 +82,4 @@ dev.off()
 
 
 # Write to CSV
-write.csv(eps, "./datasets/eps.csv", row.names = F)
+write.csv(eps, "./datasets/Processed/arms_eps.csv", row.names = F)
