@@ -23,7 +23,7 @@ library("data.table")
 library("ggplot2")
 
 # Read the csv
-data <- read.csv("./datasets/Pre_Processed/Tabac_cleaned_converted.csv", header = T)
+data <- read.csv("./datasets/Pre_Processed/Alcohol_cleaned_converted.csv", header = T)
 
 # Convert it to a data frame
 df <- as.data.frame(data)
@@ -47,12 +47,12 @@ price <- price[, -1]
 # line_colors <- rainbow(ncol(price))
 
 # PDF settings
-pdf("./datasets/Processed/Price/tabac_price.pdf", width = 12, height = 8, compress = T)
+pdf("./datasets/Processed/Price/alcohol_price.pdf", width = 12, height = 8, compress = T)
 
 
 # Create base chart
 chart <- ggplot(price, aes(x = price_date)) +
-    ggtitle("Price Trend (Tabac)") +
+    ggtitle("Price Trend (Alcohol)") +
     theme(
         plot.title = element_text(size = 20, face = "bold", hjust = 0.5),
         axis.title = element_text(size = 12, face = "bold"),
@@ -82,4 +82,4 @@ dev.off()
 
 
 # Write to CSV
-write.csv(price, "./datasets/Processed/Price/tabac_price.csv", row.names = F)
+write.csv(price, "./datasets/Processed/Price/alcohol_price.csv", row.names = F)

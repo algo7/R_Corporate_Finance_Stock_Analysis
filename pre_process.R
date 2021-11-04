@@ -25,7 +25,7 @@ library("imputeTS")
 
 
 # Read the csv
-data <- read.csv("./datasets/Tabac.csv", header = T)
+data <- read.csv("./datasets/Alcohol.csv", header = T)
 
 # Convert it to a data frame
 df <- as.data.frame(data, stringAsFactor = F)
@@ -201,4 +201,4 @@ df <- as.data.frame(round(df, 2), stringAsFactor = F)
 rownames(df) <- dates
 
 # # Write to csv
-write.csv(df, "./datasets/Processed/Tabac_cleaned_converted.csv", row.names = T)
+write.csv(df, "./datasets/Pre_Processed/Alcohol_cleaned_converted.csv", row.names = T)
