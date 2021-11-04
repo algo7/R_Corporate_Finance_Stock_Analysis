@@ -43,6 +43,8 @@ df[df == "DK"] <- "DKK"
 df[df == "CH"] <- "CHF"
 df[df == "IR"] <- "INR"
 df[df == "MP"] <- "MXN"
+df[df == "C"] <- "BRL"
+df[df == "CE"] <- "CLP"
 
 # Exchange rate for the past 5 years (2016-2021)
 # From https://www.ofx.com/en-au/forex-news/historical-exchange-rates/yearly-average-rates/
@@ -58,6 +60,9 @@ chf_to_usd <- 1.041509
 ils_to_usd <- 0.287187
 inr_to_usd <- 0.014258
 mxn_to_usd <- 0.105947
+brl_to_usd <- 0.264208
+clp_to_usd <- 0.001452
+
 
 # Currency conversion function
 currency_convert <- function(df) {
@@ -76,6 +81,8 @@ currency_convert <- function(df) {
     ils_stocks <- which(df[1, ] == "ILS")
     inr_stocks <- which(df[1, ] == "INR")
     mxn_stocks <- which(df[1, ] == "MXN")
+    brl_stocks <- which(df[1, ] == "BRL")
+    clp_stocks <- which(df[1, ] == "CLP")
 
     # Remove the currency symbol
     df <- df[-1, ]
@@ -119,6 +126,12 @@ currency_convert <- function(df) {
     # Convert MXN stocks
     converted_mxn_stocks <- df[, mxn_stocks] * mxn_to_usd
 
+    # Convert BRL stocks
+    converted_brl_stocks <- df[, brl_stocks] * brl_to_usd
+
+    # Convert CLP stocks
+    converted_clp_stocks <- df[, clp_stocks] * clp_to_usd
+
 
 
 
@@ -126,7 +139,8 @@ currency_convert <- function(df) {
         converted_aud_stocks, converted_eur_stocks, converted_gbp_stocks,
         converted_try_stocks, converted_cad_stocks, converted_idr_stocks,
         converted_hkd_stocks, converted_dkk_stocks, converted_chf_stocks,
-        converted_ils_stocks, converted_inr_stocks, converted_mxn_stocks
+        converted_ils_stocks, converted_inr_stocks, converted_mxn_stocks,
+        converted_brl_stocks, converted_clp_stocks
     )
 
     return(df)
