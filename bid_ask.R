@@ -63,6 +63,9 @@ colnames(spread) <- gsub("PA", "Spread", colnames(spread))
 # Replace NAs (happen when bid and ask are 0) with 0
 spread[is.na(spread)] <- 0
 
+# Calculate the average spread
+spread <- rbind(spread, colMeans(spread))
+
 # Write to CSV
 write.csv(pa, "./datasets/Processed/Bid_Ask/alcohol_pa.csv", row.names = F)
 write.csv(pb, "./datasets/Processed/Bid_Ask/alcohol_pb.csv", row.names = F)
