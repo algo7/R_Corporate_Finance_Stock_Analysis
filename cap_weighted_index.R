@@ -21,4 +21,8 @@ market_cap <- price * shares
 # Calculate the total market cap of all the companies each day
 market_cap <- cbind(market_cap, totalMarketCap = rowSums(market_cap))
 
+# Calculate the number of companies at each day
+number_of_stocks <- sum(market_cap[1, seq_len(ncol(market_cap)) - 1] != 0)
+
+
 write.csv(market_cap, "./datasets/mkt_cap.csv")
