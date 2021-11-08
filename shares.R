@@ -1,5 +1,5 @@
 # Read the csv
-data <- read.csv("./datasets/Separated/Arms_Shares.csv", header = T)
+data <- read.csv("./datasets/Separated/Alcohol_Shares.csv", header = T)
 
 # Convert it to a data frame
 df <- as.data.frame(data, stringAsFactor = F)
@@ -22,5 +22,9 @@ df <- df[, -1]
 # Transpose the data frame
 df <- as.data.frame(t(df))
 
-# # Write to csv
-write.csv(df, "./datasets/Pre_Processed/Arms_shares_cleaned.csv", row.names = T)
+# Replace NAs with 0
+df[is.na(df)] <- 0
+
+
+# Write to csv
+write.csv(df, "./datasets/Pre_Processed/Alcohol_shares_cleaned.csv", row.names = T)
