@@ -26,7 +26,7 @@ library("data.table")
 library("ggplot2")
 
 # Read the csv
-data <- read.csv("./datasets/Pre_Processed/Alcohol_cleaned_converted.csv", header = T)
+data <- read.csv("./datasets/Pre_Processed/Casino_cleaned_converted.csv", header = T)
 
 # Convert it to a data frame
 df <- as.data.frame(data)
@@ -67,6 +67,6 @@ spread[is.na(spread)] <- 0
 spread <- rbind(spread, colMeans(spread))
 
 # Write to CSV
-write.csv(pa, "./datasets/Processed/Bid_Ask/alcohol_pa.csv", row.names = F)
-write.csv(pb, "./datasets/Processed/Bid_Ask/alcohol_pb.csv", row.names = F)
-write.csv(spread, "./datasets/Processed/Bid_Ask/alcohol_spread.csv", row.names = F)
+write.csv(pa, "./datasets/Processed/Bid_Ask/casino_pa.csv", row.names = F)
+write.csv(pb, "./datasets/Processed/Bid_Ask/casino_pb.csv", row.names = F)
+write.csv(spread, "./datasets/Processed/Bid_Ask/casino_spread.csv", row.names = F)
