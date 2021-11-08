@@ -200,5 +200,5 @@ df <- as.data.frame(round(df, 2), stringAsFactor = F)
 # Add the dates
 rownames(df) <- dates
 
-# # Write to csv
+# Write to csv
 write.csv(df, "./datasets/Pre_Processed/Alcohol_cleaned_converted.csv", row.names = T)
