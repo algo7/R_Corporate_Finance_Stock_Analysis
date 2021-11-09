@@ -1,8 +1,6 @@
 # Clean workspace
 rm(list = ls())
 
-
-
 # Read the csvs
 shares <- read.csv(
     "./datasets/Pre_Processed/CBD_shares_cleaned.csv",
