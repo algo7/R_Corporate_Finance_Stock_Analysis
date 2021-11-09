@@ -29,8 +29,8 @@ casino_shares <- as.data.frame(casino_shares, stringAsFactor = F)
 tabac_shares <- as.data.frame(tabac_shares, stringAsFactor = F)
 arms_shares <- as.data.frame(arms_shares, stringAsFactor = F)
 
-# Remove date columns for shares data
-alcohol_shares <- alcohol_shares[, -1]
+# Remove date columns for shares data except for the alcohol shares
+# which will be used as the first data frame in cbind
 casino_shares <- casino_shares[, -1]
 tabac_shares <- tabac_shares[, -1]
 arms_shares <- arms_shares[, -1]
@@ -58,4 +58,4 @@ merged_price <- merged_price[, -id_dup_price]
 
 
 write.csv(merged_shares, "./datasets/Pre_Processed/sin_stocks_merged_shares.csv", row.names = F)
-write.csv(merged_price, "./datasets/Pre_Processed/sin_stock_merged_price.csv", row.names = F)
+write.csv(merged_price, "./datasets/Pre_Processed/sin_stocks_merged_price.csv", row.names = F)
