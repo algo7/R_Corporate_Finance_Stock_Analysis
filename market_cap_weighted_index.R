@@ -174,4 +174,4 @@ print(chart)
 dev.off()
 
 
-write.csv(market_cap, "./datasets/Processed/Index/combined.csv")
+write.csv(cbind(market_cap, market_cap_cbd), "./datasets/Processed/Index/combined.csv", row.names = F)
