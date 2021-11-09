@@ -1,6 +1,8 @@
 # Clean workspace
 rm(list = ls())
 
+
+
 # Read the csvs
 shares <- read.csv(
     "./datasets/Pre_Processed/CBD_shares_cleaned.csv",
@@ -82,4 +84,35 @@ for (i in seq_len(nrow(market_cap))) {
 }
 
 
-write.csv(market_cap, "./datasets/mkt_cap.csv")
+# Format dates
+date <- as.Date(gsub("/", "-", rownames(shares), ), "%m-%d-%y")
+
+# PDF settings
+pdf("./datasets/Processed/Index/tripping_25.pdf", width = 12, height = 8, compress = T)
+
+
+# Create base chart
+chart <- ggplot(as.data.frame(market_cap$index), aes(x = date)) +
+    ggtitle("Tripping 12") +
+    theme(
+        plot.title = element_text(size = 20, face = "bold", hjust = 0.5),
+        axis.title = element_text(size = 12, face = "bold"),
+    ) +
+    xlab("Date") +
+    ylab("Index Level") +
+    ylim(0, max(market_cap$index) * 1.1) +
+    geom_line(aes_(
+        y = market_cap$index,
+        group = "Tripping 12",
+        color = "Tripping 12",
+    ))
+
+# Change legend box title
+chart$labels$colour <- "Index"
+
+# Print the chart
+print(chart)
+dev.off()
+
+
+write.csv(market_cap, "./datasets/Processed/Index/tripping12.csv")
