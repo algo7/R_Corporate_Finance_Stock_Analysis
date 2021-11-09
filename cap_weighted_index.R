@@ -53,27 +53,33 @@ market_cap$divisor[1] <-
     market_cap$total_market_cap[1] / 10000
 
 # Calculate the initial index
-market_cap$index[1] <-
-    market_cap$total_market_cap[1] / market_cap$divisor[1]
+market_cap$index <- market_cap$total_market_cap / market_cap$divisor
 
 # Calculate the divisor for each day later on
+# Source: https://www.spglobal.com/spdji/en/documents/methodologies/methodology-index-math.pdf
 for (i in seq_len(nrow(market_cap))) {
     # Don't calculate the divisor for the first day (already calculated)
     if (i != 1) {
         # If the number of stocks changes
         if (market_cap$number_of_stocks[i] !=
             market_cap$number_of_stocks[i - 1]) {
-            # Recalculate the divisor
-            market_cap$divisor[i] <- market_cap$total_market_cap[i] / 10000
+            # Recalculate the divisor (the divisor is now
+            # base on the previous index)
+            # index t == index t-1
+            market_cap$divisor[i] <-
+                market_cap$total_market_cap[i] / market_cap$index[i - 1]
+
+            # Recalculate the index
+            market_cap$index[i] <-
+                market_cap$total_market_cap[i] / market_cap$divisor[i]
         } else {
             # Otherwise keep the previous divisor
             market_cap$divisor[i] <- market_cap$divisor[i - 1]
+            market_cap$index[i] <-
+                market_cap$total_market_cap[i] / market_cap$divisor[i - 1]
         }
     }
 }
-
-
-
 
 
 write.csv(market_cap, "./datasets/mkt_cap.csv")
