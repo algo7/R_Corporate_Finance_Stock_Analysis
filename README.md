@@ -1,5 +1,7 @@
 # Corporate_Finance_Stock_Analysis
 Data processing utilities for stock analysis for EHL Corporate Finance Course
+
+### File Description
 - bid-ask.R: Calculate the bid-ask spread.
 - eps.R: Extract the EPS data from the raw data and plot them.
 - exctract_treasury_bonds.R: Extract the average interest rate from fiscaldata.treasury.gov data.
