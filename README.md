@@ -6,5 +6,5 @@ Data processing utilities for stock analysis for EHL Corporate Finance Course
 - pre_process.R: Data pre-processing (convert non-usd currency to usd | Missing data interpolation).
 - price.R: Extract the price data from the raw data and plot them.
 - shares.R: Process shares raw data (missing data interpolation).
-- shares_price_combine.R: Combine the shares data and price data.
+- shares_price_combine.R: Combine the all shares data into one file and all price data into one file.
 - market_cap_weighted_index.R: Calculate market-cap-weighted index for both the CBD and sin stocks.
