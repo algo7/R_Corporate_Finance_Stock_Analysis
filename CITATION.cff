@@ -1,0 +1,9 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+authors:
+- family-names: "Lo"
+  given-names: "Aviv"
+title: "R_Corporate_Finance_Stock_Analysis"
+version: 1.0.0
+date-released: 2021-12-5
+url: "https://github.com/algo7/R_Corporate_Finance_Stock_Analysis"
