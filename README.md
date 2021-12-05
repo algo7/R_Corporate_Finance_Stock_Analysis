@@ -10,3 +10,11 @@ Data processing utilities for stock analysis for EHL Corporate Finance Course
 - shares.R: Process shares raw data (missing data interpolation).
 - shares_price_combine.R: Combine the all shares data into one file and all price data into one file.
 - market_cap_weighted_index.R: Calculate market-cap-weighted index for both the CBD and sin stocks.
+
+### Folder Description:
+- datasets: All the data used during the analysis.
+  - Raw: Raw data from dDatastream | REFINITIV.
+  - Pre_Processed: Data pre-processing and currency converstion (to USD).
+  - Processed: Processed data.
+  - 
+
