@@ -14,7 +14,7 @@ Data processing utilities for stock analysis for EHL Corporate Finance Course
 
 ### Folder Description:
 - datasets: All the data used during the analysis (excluding the shares data).
-  - Raw: Raw data from dDatastream | REFINITIV.
+  - Raw: Raw data from Datastream | REFINITIV.
   - Pre_Processed: Data pre-processing and currency converstion (to USD).
   - Processed: Processed data.
   - Shares: Shares data (raw / processed) for calculating the market-cap-weighted indeices.
