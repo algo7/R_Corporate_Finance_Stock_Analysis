@@ -12,9 +12,9 @@ Data processing utilities for stock analysis for EHL Corporate Finance Course
 - market_cap_weighted_index.R: Calculate market-cap-weighted index for both the CBD and sin stocks.
 
 ### Folder Description:
-- datasets: All the data used during the analysis.
+- datasets: All the data used during the analysis (excluding the shares data).
   - Raw: Raw data from dDatastream | REFINITIV.
   - Pre_Processed: Data pre-processing and currency converstion (to USD).
   - Processed: Processed data.
-  - 
+  - Shares: Shares data (raw / processed) for calculating the market-cap-weighted indeices.
 
