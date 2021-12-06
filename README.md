@@ -1,6 +1,6 @@
 # Corporate_Finance_Stock_Analysis
-Data processing utilities for stock analysis for EHL Corporate Finance Course
-
+Data processing utilities for stock analysis for EHL Corporate Finance Course.
+The scripts here are designed to be used with data from Datastream | REFINITIV.
 ### File Description:
 - bid-ask.R: Calculate the bid-ask spread.
 - eps.R: Extract the EPS data from the raw data and plot them.
